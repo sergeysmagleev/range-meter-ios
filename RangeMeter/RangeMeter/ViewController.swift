@@ -19,6 +19,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     private let disposeBag = DisposeBag()
     private let locationManager = CLLocationManager()
     private let locationUpdates = PublishSubject<CLLocationCoordinate2D>()
+    private let batteryLife = Observable<Int>
+        .interval(5.0, scheduler: MainScheduler.instance)
+        .scan(100.0) { (previousCharge, _) -> Double in
+            let value = previousCharge - 5.0
+            return value > 0 ? value : 0
+    }
+    
     private var subscribed = false
     private var currentOverlay: MKOverlay?
     
@@ -29,6 +36,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.startUpdatingLocation()
         if CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse {
             locationManager.requestWhenInUseAuthorization()
+        } else {
+            subscribeToNetworking()
         }
     }
     
@@ -43,8 +52,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             .debug()
             .map { location -> String in
                 return "\(location.latitude),\(location.longitude)"
-            }.flatMap { locationString -> Observable<(HTTPURLResponse, Any)> in
-                return RxAlamofire.requestJSON(.get, "https://isoline.route.cit.api.here.com/routing/7.2/calculateisoline.json?app_id=7IQiOdNho9z1vWo9aECh&app_code=oQDeGdXmm4oQAwqlwnCouQ&mode=fastest;car&rangetype=time&start=geo!\(locationString)&range=300&singlecomponent=true")
+            }.withLatestFrom(batteryLife, resultSelector: { (locationString, batteryLife) in
+                return (locationString, batteryLife)
+            })
+            .flatMap { (locationString, batteryLife) -> Observable<(HTTPURLResponse, Any)> in
+                let batteryString = Int(300 * batteryLife / 100)
+                return RxAlamofire.requestJSON(.get, "https://isoline.route.cit.api.here.com/routing/7.2/calculateisoline.json?app_id=7IQiOdNho9z1vWo9aECh&app_code=oQDeGdXmm4oQAwqlwnCouQ&mode=fastest;car&rangetype=time&start=geo!\(locationString)&range=\(batteryString)&singlecomponent=true")
             }.map { (arg) -> Response? in
                 let (_, json) = arg
                 let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
