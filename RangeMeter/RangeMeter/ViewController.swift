@@ -108,15 +108,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
         } else if overlay is MKPolyline {
             let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = UIColor.orange
+            renderer.strokeColor = UIColor.blue
             renderer.lineWidth = 3
             return renderer
             
         } else if overlay is MKPolygon {
             let renderer = MKPolygonRenderer(polygon: overlay as! MKPolygon)
-            renderer.fillColor = UIColor.black.withAlphaComponent(0.5)
-            renderer.strokeColor = UIColor.orange
-            renderer.lineWidth = 2
+            renderer.fillColor = UIColor(red: 0.5, green: 0.55, blue: 0.6, alpha: 0.5)
+            renderer.strokeColor = UIColor(red: 0.25, green: 0.2, blue: 0.4, alpha: 0.95)
+            renderer.lineWidth = 1
             return renderer
         }
         

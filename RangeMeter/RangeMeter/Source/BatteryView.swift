@@ -35,6 +35,7 @@ class BatteryView: UIView {
         guard let context = UIGraphicsGetCurrentContext() else {
             return
         }
+        context.clear(self.bounds)
         context.setFillColor(UIColor.white.cgColor)
         context.fill(self.bounds)
         let color = batteryColor(batteryLife: batteryLife)
@@ -44,5 +45,15 @@ class BatteryView: UIView {
         chargeRect.size = newSize
         context.setFillColor(color.cgColor)
         context.fill(chargeRect)
+        context.setStrokeColor(UIColor.black.cgColor)
+        let str = NSAttributedString(string: "\(Int(batteryLife))%",
+            attributes: [kCTFontAttributeName as NSAttributedStringKey: UIFont.systemFont(ofSize: 18.0),
+                         kCTForegroundColorAttributeName as NSAttributedStringKey: UIColor.black])
+        let strRect = str.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT),
+                                                    height: CGFloat(MAXFLOAT)),
+                                       options: NSStringDrawingOptions.usesLineFragmentOrigin,
+                                       context: nil)
+        str.draw(at: CGPoint(x: (self.bounds.width - strRect.width) / 2,
+                             y: (self.bounds.height - strRect.height) / 2))
     }
 }
