@@ -58,8 +58,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 return (locationString, batteryLife)
             })
             .flatMap { (locationString, batteryLife) -> Observable<(HTTPURLResponse, Any)> in
-                let batteryString = Int(300 * batteryLife / 100)
-                return RxAlamofire.requestJSON(.get, "https://isoline.route.cit.api.here.com/routing/7.2/calculateisoline.json?app_id=7IQiOdNho9z1vWo9aECh&app_code=oQDeGdXmm4oQAwqlwnCouQ&mode=fastest;car&rangetype=time&start=geo!\(locationString)&range=\(batteryString)&singlecomponent=true")
+                return RxAlamofire.requestJSON(.get, "https://isoline.route.cit.api.here.com/routing/7.2/calculateisoline.json?app_id=7IQiOdNho9z1vWo9aECh&app_code=oQDeGdXmm4oQAwqlwnCouQ&mode=fastest;car&rangetype=time&start=geo!\(locationString)&range=\(self.timeInSeconds(batteryLife: batteryLife))&singlecomponent=true")
             }.map { (arg) -> Response? in
                 let (_, json) = arg
                 let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
@@ -96,6 +95,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         batteryLife.subscribe(onNext: { [unowned self] (batteryLife) in
             self.batteryView.changeBatteryLife(batteryLife)
         }).disposed(by: disposeBag)
+    }
+    
+    private func timeInSeconds(batteryLife: Double) -> Int {
+        let kwh = 37.0
+        let whm = 146.0
+        let distance = (kwh / whm) * 1000
+        let constantVelocity = 80.5
+        let timeInHours = distance / constantVelocity
+        let batteryLifeMultiple = batteryLife / 1000
+        return Int(timeInHours * 3600 * batteryLifeMultiple)
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -140,7 +149,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return
         }
         locationUpdates.onNext(location.coordinate)
-        let viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 5000, 5000)
+        let viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 10000, 10000)
         mapView.setRegion(viewRegion, animated: false)
     }
     
