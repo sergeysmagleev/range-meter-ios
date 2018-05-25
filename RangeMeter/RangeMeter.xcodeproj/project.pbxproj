@@ -144,7 +144,6 @@
 		C5F045D920B8551600EFA281 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				C5F045E620B8581B00EFA281 /* API */,
 				C5F045E520B8581200EFA281 /* Model */,
 				C5F045DA20B8551C00EFA281 /* Scenes */,
 			);
@@ -188,14 +187,6 @@
 				C5F045F320B8713200EFA281 /* CoordinateTransform.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		C5F045E620B8581B00EFA281 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				C5F045E720B8582F00EFA281 /* RangeMeterAPI.swift */,
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
