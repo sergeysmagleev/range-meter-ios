@@ -18,6 +18,11 @@
 		C5F045E220B8580000EFA281 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045E120B8580000EFA281 /* MainViewModel.swift */; };
 		C5F045E420B8580900EFA281 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045E320B8580900EFA281 /* MainInteractor.swift */; };
 		C5F045E820B8582F00EFA281 /* RangeMeterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045E720B8582F00EFA281 /* RangeMeterAPI.swift */; };
+		C5F045EA20B86F0300EFA281 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045E920B86F0300EFA281 /* Response.swift */; };
+		C5F045EE20B86F1400EFA281 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045ED20B86F1400EFA281 /* Coordinate.swift */; };
+		C5F045F020B8700000EFA281 /* Isoline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045EF20B8700000EFA281 /* Isoline.swift */; };
+		C5F045F220B8700F00EFA281 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045F120B8700F00EFA281 /* Component.swift */; };
+		C5F045F420B8713200EFA281 /* CoordinateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045F320B8713200EFA281 /* CoordinateTransform.swift */; };
 		FA7CD750A5EF1A5396E518AA /* Pods_RangeMeter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A6FE9FD243D44438B55877 /* Pods_RangeMeter.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +55,11 @@
 		C5F045E120B8580000EFA281 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		C5F045E320B8580900EFA281 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		C5F045E720B8582F00EFA281 /* RangeMeterAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeMeterAPI.swift; sourceTree = "<group>"; };
+		C5F045E920B86F0300EFA281 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		C5F045ED20B86F1400EFA281 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		C5F045EF20B8700000EFA281 /* Isoline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Isoline.swift; sourceTree = "<group>"; };
+		C5F045F120B8700F00EFA281 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		C5F045F320B8713200EFA281 /* CoordinateTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateTransform.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +181,11 @@
 		C5F045E520B8581200EFA281 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C5F045E920B86F0300EFA281 /* Response.swift */,
+				C5F045ED20B86F1400EFA281 /* Coordinate.swift */,
+				C5F045EF20B8700000EFA281 /* Isoline.swift */,
+				C5F045F120B8700F00EFA281 /* Component.swift */,
+				C5F045F320B8713200EFA281 /* CoordinateTransform.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -339,6 +354,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5F045EA20B86F0300EFA281 /* Response.swift in Sources */,
+				C5F045F220B8700F00EFA281 /* Component.swift in Sources */,
+				C5F045F420B8713200EFA281 /* CoordinateTransform.swift in Sources */,
+				C5F045F020B8700000EFA281 /* Isoline.swift in Sources */,
 				C5F045E820B8582F00EFA281 /* RangeMeterAPI.swift in Sources */,
 				C5F045E220B8580000EFA281 /* MainViewModel.swift in Sources */,
 				C5F045DE20B8554100EFA281 /* MainViewController.swift in Sources */,
@@ -346,6 +365,7 @@
 				C5F045BA20B8522600EFA281 /* AppDelegate.swift in Sources */,
 				C5F045E020B8557200EFA281 /* InputViewController.swift in Sources */,
 				C5F045E420B8580900EFA281 /* MainInteractor.swift in Sources */,
+				C5F045EE20B86F1400EFA281 /* Coordinate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
