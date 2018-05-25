@@ -17,7 +17,6 @@
 		C5F045E020B8557200EFA281 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045DF20B8557200EFA281 /* InputViewController.swift */; };
 		C5F045E220B8580000EFA281 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045E120B8580000EFA281 /* MainViewModel.swift */; };
 		C5F045E420B8580900EFA281 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045E320B8580900EFA281 /* MainInteractor.swift */; };
-		C5F045E820B8582F00EFA281 /* RangeMeterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045E720B8582F00EFA281 /* RangeMeterAPI.swift */; };
 		FA7CD750A5EF1A5396E518AA /* Pods_RangeMeter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A6FE9FD243D44438B55877 /* Pods_RangeMeter.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +48,6 @@
 		C5F045DF20B8557200EFA281 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		C5F045E120B8580000EFA281 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		C5F045E320B8580900EFA281 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
-		C5F045E720B8582F00EFA281 /* RangeMeterAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeMeterAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +132,6 @@
 		C5F045D920B8551600EFA281 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				C5F045E620B8581B00EFA281 /* API */,
 				C5F045E520B8581200EFA281 /* Model */,
 				C5F045DA20B8551C00EFA281 /* Scenes */,
 			);
@@ -173,14 +170,6 @@
 			children = (
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		C5F045E620B8581B00EFA281 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				C5F045E720B8582F00EFA281 /* RangeMeterAPI.swift */,
-			);
-			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,7 +328,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5F045E820B8582F00EFA281 /* RangeMeterAPI.swift in Sources */,
 				C5F045E220B8580000EFA281 /* MainViewModel.swift in Sources */,
 				C5F045DE20B8554100EFA281 /* MainViewController.swift in Sources */,
 				C5F045BC20B8522600EFA281 /* ViewController.swift in Sources */,
