@@ -22,6 +22,7 @@
 		C5F045F020B8700000EFA281 /* Isoline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045EF20B8700000EFA281 /* Isoline.swift */; };
 		C5F045F220B8700F00EFA281 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045F120B8700F00EFA281 /* Component.swift */; };
 		C5F045F420B8713200EFA281 /* CoordinateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045F320B8713200EFA281 /* CoordinateTransform.swift */; };
+		C5F045FA20B895BB00EFA281 /* BatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045F920B895BB00EFA281 /* BatteryView.swift */; };
 		FA7CD750A5EF1A5396E518AA /* Pods_RangeMeter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A6FE9FD243D44438B55877 /* Pods_RangeMeter.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		C5F045EF20B8700000EFA281 /* Isoline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Isoline.swift; sourceTree = "<group>"; };
 		C5F045F120B8700F00EFA281 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		C5F045F320B8713200EFA281 /* CoordinateTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateTransform.swift; sourceTree = "<group>"; };
+		C5F045F920B895BB00EFA281 /* BatteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			children = (
 				C5F045E520B8581200EFA281 /* Model */,
 				C5F045DA20B8551C00EFA281 /* Scenes */,
+				C5F045F920B895BB00EFA281 /* BatteryView.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				C5F045F020B8700000EFA281 /* Isoline.swift in Sources */,
 				C5F045E220B8580000EFA281 /* MainViewModel.swift in Sources */,
 				C5F045DE20B8554100EFA281 /* MainViewController.swift in Sources */,
+				C5F045FA20B895BB00EFA281 /* BatteryView.swift in Sources */,
 				C5F045BC20B8522600EFA281 /* ViewController.swift in Sources */,
 				C5F045BA20B8522600EFA281 /* AppDelegate.swift in Sources */,
 				C5F045E020B8557200EFA281 /* InputViewController.swift in Sources */,

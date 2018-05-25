@@ -19,24 +19,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g8u-Qc-DkJ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="579"/>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K9G-aH-ebH" customClass="BatteryView" customModule="RangeMeter" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="579" width="375" height="88"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="FhW-9m-XIu"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="K9G-aH-ebH" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6wM-cK-mUL"/>
                             <constraint firstItem="g8u-Qc-DkJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7qf-7B-FQU"/>
+                            <constraint firstItem="K9G-aH-ebH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="HOi-si-YNU"/>
+                            <constraint firstItem="g8u-Qc-DkJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="JlU-gZ-C5U"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="g8u-Qc-DkJ" secondAttribute="trailing" id="LDk-44-VX0"/>
-                            <constraint firstItem="g8u-Qc-DkJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dsM-5h-aOH"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="g8u-Qc-DkJ" secondAttribute="bottom" id="tIG-rc-igT"/>
+                            <constraint firstItem="K9G-aH-ebH" firstAttribute="top" secondItem="g8u-Qc-DkJ" secondAttribute="bottom" id="cQx-cO-Ulp"/>
+                            <constraint firstItem="K9G-aH-ebH" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="jJ1-ad-kmV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="batteryView" destination="K9G-aH-ebH" id="mkX-MG-dPv"/>
                         <outlet property="mapView" destination="g8u-Qc-DkJ" id="xFW-U6-CXT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="31.934032983508249"/>
         </scene>
     </scenes>
 </document>

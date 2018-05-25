@@ -16,6 +16,8 @@ import CoreLocation
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var batteryView: BatteryView!
+    
     private let disposeBag = DisposeBag()
     private let locationManager = CLLocationManager()
     private let locationUpdates = PublishSubject<CLLocationCoordinate2D>()
@@ -24,7 +26,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         .scan(100.0) { (previousCharge, _) -> Double in
             let value = previousCharge - 5.0
             return value > 0 ? value : 0
-    }
+    }.share()
     
     private var subscribed = false
     private var currentOverlay: MKOverlay?
@@ -91,6 +93,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.currentOverlay = polygon
             })
             .disposed(by: disposeBag)
+        batteryLife.subscribe(onNext: { [unowned self] (batteryLife) in
+            self.batteryView.changeBatteryLife(batteryLife)
+        }).disposed(by: disposeBag)
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
