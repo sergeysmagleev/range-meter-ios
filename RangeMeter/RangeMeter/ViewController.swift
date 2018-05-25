@@ -9,18 +9,72 @@
 import RxAlamofire
 import RxSwift
 import UIKit
+import ObjectMapper
+import MapKit
+import CoreLocation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, MKMapViewDelegate {
     
+    @IBOutlet weak var mapView: MKMapView!
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        RxAlamofire.requestJSON(.get, "https://isoline.route.cit.api.here.com/routing/7.2/calculateisoline.json?app_id=7IQiOdNho9z1vWo9aECh&app_code=oQDeGdXmm4oQAwqlwnCouQ&mode=fastest;car&rangetype=time&start=geo!52.51578,13.37749&range=300&singlecomponent=true")
-            .subscribe(onNext: { (r, json) in
-                
+        mapView.delegate = self
+        RxAlamofire.requestJSON(.get, "https://isoline.route.cit.api.here.com/routing/7.2/calculateisoline.json?app_id=7IQiOdNho9z1vWo9aECh&app_code=oQDeGdXmm4oQAwqlwnCouQ&mode=fastest;car&rangetype=time&start=geo!48.8566,2.3522&range=300&singlecomponent=true")
+            .map { (arg) -> Response? in
+                let (_, json) = arg
+                let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
+                guard let jsonString = String(data: jsonData, encoding: .utf8),
+                    let response = Mapper<Response>().map(JSONString: jsonString) else {
+                    return nil
+                }
+                return response
+            }.flatMap { response -> Observable<Response> in
+                if let response = response {
+                    return .just(response)
+                } else {
+                    return .empty()
+                }
+            }.map { response -> [Coordinate] in
+                return response.isoline.first?.component.first?.shape ?? []
+            }.map { coordinates -> [CLLocationCoordinate2D] in
+                return coordinates.map { coordinate in
+                    return CLLocationCoordinate2D(latitude: coordinate.lat,
+                                                  longitude: coordinate.lng)
+                }
+            }
+            .map { coordinates -> MKPolygon in
+                return MKPolygon(coordinates: coordinates, count: coordinates.count)
+            }.subscribe(onNext: { [unowned self] polygon in
+                self.mapView.add(polygon)
             })
             .disposed(by: disposeBag)
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKCircle {
+            let renderer = MKCircleRenderer(overlay: overlay)
+            renderer.fillColor = UIColor.black.withAlphaComponent(0.5)
+            renderer.strokeColor = UIColor.blue
+            renderer.lineWidth = 2
+            return renderer
+            
+        } else if overlay is MKPolyline {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = UIColor.orange
+            renderer.lineWidth = 3
+            return renderer
+            
+        } else if overlay is MKPolygon {
+            let renderer = MKPolygonRenderer(polygon: overlay as! MKPolygon)
+            renderer.fillColor = UIColor.black.withAlphaComponent(0.5)
+            renderer.strokeColor = UIColor.orange
+            renderer.lineWidth = 2
+            return renderer
+        }
+        
+        return MKOverlayRenderer()
     }
     
 }

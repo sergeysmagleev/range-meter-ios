@@ -17,7 +17,6 @@
 		C5F045E020B8557200EFA281 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045DF20B8557200EFA281 /* InputViewController.swift */; };
 		C5F045E220B8580000EFA281 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045E120B8580000EFA281 /* MainViewModel.swift */; };
 		C5F045E420B8580900EFA281 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045E320B8580900EFA281 /* MainInteractor.swift */; };
-		C5F045E820B8582F00EFA281 /* RangeMeterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045E720B8582F00EFA281 /* RangeMeterAPI.swift */; };
 		C5F045EA20B86F0300EFA281 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045E920B86F0300EFA281 /* Response.swift */; };
 		C5F045EE20B86F1400EFA281 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045ED20B86F1400EFA281 /* Coordinate.swift */; };
 		C5F045F020B8700000EFA281 /* Isoline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045EF20B8700000EFA281 /* Isoline.swift */; };
@@ -106,6 +105,7 @@
 				C5F045B720B8522600EFA281 /* Products */,
 				74C6B1DD8792E08C8B77B9F2 /* Pods */,
 				55B953BD93D5C1390A9BBD0B /* Frameworks */,
+				C5F045F620B8747400EFA281 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -187,6 +187,14 @@
 				C5F045F320B8713200EFA281 /* CoordinateTransform.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C5F045F620B8747400EFA281 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				C5F045E720B8582F00EFA281 /* RangeMeterAPI.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,7 +357,6 @@
 				C5F045F220B8700F00EFA281 /* Component.swift in Sources */,
 				C5F045F420B8713200EFA281 /* CoordinateTransform.swift in Sources */,
 				C5F045F020B8700000EFA281 /* Isoline.swift in Sources */,
-				C5F045E820B8582F00EFA281 /* RangeMeterAPI.swift in Sources */,
 				C5F045E220B8580000EFA281 /* MainViewModel.swift in Sources */,
 				C5F045DE20B8554100EFA281 /* MainViewController.swift in Sources */,
 				C5F045BC20B8522600EFA281 /* ViewController.swift in Sources */,
@@ -538,6 +545,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VB5R679N4H;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = RangeMeter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -545,6 +553,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sergeysmagleev.RangeMeter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

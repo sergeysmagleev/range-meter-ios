@@ -16,7 +16,7 @@ class Response: Mappable {
     }
     
     func mapping(map: Map) {
-        isoline <- map["isoline"]
+        isoline <- map["response.isoline"]
     }
     
 }
