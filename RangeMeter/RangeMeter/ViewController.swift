@@ -12,6 +12,7 @@ import UIKit
 import ObjectMapper
 import MapKit
 import CoreLocation
+import CoreGraphics
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
@@ -28,8 +29,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return value > 0 ? value : 0
     }.share()
     
+    private let hardcodedPinLocations = [
+        CLLocationCoordinate2D(latitude: 37.7782793, longitude: -122.41496819999998),
+        CLLocationCoordinate2D(latitude: 37.709593866171616, longitude: -122.45960015800779),
+        CLLocationCoordinate2D(latitude: 37.61936453669866, longitude: -122.41668481376945),
+        CLLocationCoordinate2D(latitude: 37.553253695187344, longitude: -122.3147179558593),
+        CLLocationCoordinate2D(latitude: 37.48790142116992, longitude: -122.27180261162101),
+        CLLocationCoordinate2D(latitude: 37.438031859296984, longitude: -122.13501972313577),
+        CLLocationCoordinate2D(latitude: 37.366030298687946, longitude: -122.07905811424905),
+        CLLocationCoordinate2D(latitude: 37.33054956877157, longitude: -122.04129261131936),
+        CLLocationCoordinate2D(latitude: 37.35620654453343, longitude: -121.95031208153421),
+        CLLocationCoordinate2D(latitude: 37.2912282677701, longitude: -121.88630908655603)
+    ]
+    
     private var subscribed = false
     private var currentOverlay: MKOverlay?
+    private var currentPins: [MKPointAnnotation] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +63,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return
         }
         subscribed = true
-        Observable<Int>
+        let response = Observable<Int>
             .interval(5.0, scheduler: MainScheduler.instance)
             .withLatestFrom(locationUpdates)
             .debug()
@@ -57,7 +72,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }.withLatestFrom(batteryLife, resultSelector: { (locationString, batteryLife) in
                 return (locationString, batteryLife)
             })
-            .flatMap { (locationString, batteryLife) -> Observable<(HTTPURLResponse, Any)> in
+            .flatMap { (arg) -> Observable<(HTTPURLResponse, Any)> in
+                let (locationString, batteryLife) = arg
                 return RxAlamofire.requestJSON(.get, "https://isoline.route.cit.api.here.com/routing/7.2/calculateisoline.json?app_id=7IQiOdNho9z1vWo9aECh&app_code=oQDeGdXmm4oQAwqlwnCouQ&mode=fastest;car&rangetype=time&start=geo!\(locationString)&range=\(self.timeInSeconds(batteryLife: batteryLife))&singlecomponent=true")
             }.map { (arg) -> Response? in
                 let (_, json) = arg
@@ -80,9 +96,56 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     return CLLocationCoordinate2D(latitude: coordinate.lat,
                                                   longitude: coordinate.lng)
                 }
+            }.share()
+        
+        response.map { coordinates -> CGPath in
+            let path = CGMutablePath()
+            guard let firstPoint = coordinates.first else {
+                return path
             }
-            .map { coordinates -> MKPolygon in
-                return MKPolygon(coordinates: coordinates, count: coordinates.count)
+            path.move(to: CGPoint(x: firstPoint.latitude, y: firstPoint.longitude))
+            coordinates.forEach { (coordinate) in
+                path.addLine(to: CGPoint(x: coordinate.latitude, y: coordinate.longitude))
+            }
+//            path.move(to: CGPoint(x: firstPoint.latitude, y: firstPoint.longitude))
+            path.addLine(to: CGPoint(x: firstPoint.latitude, y: firstPoint.longitude))
+            path.closeSubpath()
+            return path
+            }.map { [unowned self] path -> [CLLocationCoordinate2D] in
+                return self.hardcodedPinLocations.map { coordinate -> (CLLocationCoordinate2D, CGPoint) in
+                    return (coordinate, CGPoint(x: coordinate.latitude, y: coordinate.longitude))
+                    }
+                    .filter { (_, point) in
+                        return path.contains(point)
+                    }.map{ (coordinate, point) -> CLLocationCoordinate2D in
+                        return coordinate
+                }
+            }.subscribe(onNext: { [unowned self] coordinates in
+                let annotations = coordinates.map { coordinate -> MKPointAnnotation in
+                    let view = MKPointAnnotation()
+                    view.coordinate = coordinate
+                    return view
+                }
+                self.mapView.addAnnotations(annotations)
+                self.mapView.removeAnnotations(self.currentPins)
+                self.currentPins = annotations
+            }).disposed(by: disposeBag)
+        
+//        hardcodedPinLocations.map { coordinate -> MKPointAnnotation in
+//            let view = MKPointAnnotation()
+//            view.coordinate = coordinate
+//            return view
+//            }.forEach { (annotation) in
+//                mapView.addAnnotation(annotation)
+//        }
+        
+//            .map { coordinates -> [CLLocationCoordinate2D] in
+//            return hardcodedPinLocations.filter{
+//
+//            }
+            
+        response.map { coordinates -> MKPolygon in
+            return MKPolygon(coordinates: coordinates, count: coordinates.count)
             }.debug()
             .subscribe(onNext: { [unowned self] polygon in
                 if let overlay = self.currentOverlay {
@@ -132,6 +195,29 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         return MKOverlayRenderer()
     }
     
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation {
+            return nil
+        }
+        let reuseID = "lighning"
+        if let view = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) {
+            view.annotation = annotation
+            return view
+        }
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+        annotationView.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+        let image = UIImage(named: "lightning")!
+        let size = min(image.size.width, image.size.height)
+        annotationView.image = image
+        annotationView.contentMode = .scaleAspectFit
+        annotationView.layer.cornerRadius = size / 2
+        annotationView.layer.masksToBounds = true
+        annotationView.annotation = annotation
+        annotationView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        return annotationView
+    }
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
@@ -149,7 +235,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return
         }
         locationUpdates.onNext(location.coordinate)
-        let viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 10000, 10000)
+        let viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 20000, 20000)
         mapView.setRegion(viewRegion, animated: false)
     }
     
