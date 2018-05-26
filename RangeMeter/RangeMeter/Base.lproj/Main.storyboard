@@ -28,6 +28,20 @@
                                     <constraint firstAttribute="height" constant="88" id="FhW-9m-XIu"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25° C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIu-XH-LoN">
+                                <rect key="frame" x="16" y="20" width="75.5" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun" translatesAutoresizingMaskIntoConstraints="NO" id="v2C-O6-qag">
+                                <rect key="frame" x="16" y="64" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="aJK-y5-4pz"/>
+                                    <constraint firstAttribute="height" constant="32" id="gDh-6B-YrB"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -36,14 +50,20 @@
                             <constraint firstItem="K9G-aH-ebH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="HOi-si-YNU"/>
                             <constraint firstItem="g8u-Qc-DkJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="JlU-gZ-C5U"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="g8u-Qc-DkJ" secondAttribute="trailing" id="LDk-44-VX0"/>
+                            <constraint firstItem="v2C-O6-qag" firstAttribute="top" secondItem="cIu-XH-LoN" secondAttribute="bottom" constant="8" id="LVr-vL-feU"/>
+                            <constraint firstItem="cIu-XH-LoN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="V13-Mj-2Fd"/>
+                            <constraint firstItem="v2C-O6-qag" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="cJG-2x-Gfd"/>
                             <constraint firstItem="K9G-aH-ebH" firstAttribute="top" secondItem="g8u-Qc-DkJ" secondAttribute="bottom" id="cQx-cO-Ulp"/>
                             <constraint firstItem="K9G-aH-ebH" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="jJ1-ad-kmV"/>
+                            <constraint firstItem="cIu-XH-LoN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="p3Z-Yc-CLy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="batteryView" destination="K9G-aH-ebH" id="mkX-MG-dPv"/>
                         <outlet property="mapView" destination="g8u-Qc-DkJ" id="xFW-U6-CXT"/>
+                        <outlet property="temperatureLabel" destination="cIu-XH-LoN" id="IDl-Ph-UE2"/>
+                        <outlet property="weatherIcon" destination="v2C-O6-qag" id="VHP-uo-GYw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -51,4 +71,7 @@
             <point key="canvasLocation" x="32.799999999999997" y="31.934032983508249"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="sun" width="112" height="112"/>
+    </resources>
 </document>

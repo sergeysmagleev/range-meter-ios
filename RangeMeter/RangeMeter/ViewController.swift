@@ -18,6 +18,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var batteryView: BatteryView!
+    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var weatherIcon: UIImageView!
     
     private let disposeBag = DisposeBag()
     private let locationManager = CLLocationManager()
@@ -71,6 +73,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         } else {
             subscribeToNetworking()
         }
+        temperatureLabel.layer.shadowColor = UIColor.black.cgColor
+        temperatureLabel.layer.shadowOffset = CGSize(width: 2, height: 2)
+        temperatureLabel.layer.shadowRadius = 2
+        temperatureLabel.layer.shadowOpacity = 1.0
+        weatherIcon.layer.shadowColor = UIColor.black.cgColor
+        weatherIcon.layer.shadowOffset = CGSize(width: 2, height: 2)
+        weatherIcon.layer.shadowRadius = 2
+        weatherIcon.layer.shadowOpacity = 1.0
     }
     
     private func subscribeToNetworking() {
