@@ -207,7 +207,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
         annotationView.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-        let image = UIImage(named: "lightning")!
+        let image = UIImage(named: "lightning-bolt-64")!
         let size = min(image.size.width, image.size.height)
         annotationView.image = image
         annotationView.contentMode = .scaleAspectFit
