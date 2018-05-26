@@ -39,7 +39,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         CLLocationCoordinate2D(latitude: 37.366030298687946, longitude: -122.07905811424905),
         CLLocationCoordinate2D(latitude: 37.33054956877157, longitude: -122.04129261131936),
         CLLocationCoordinate2D(latitude: 37.35620654453343, longitude: -121.95031208153421),
-        CLLocationCoordinate2D(latitude: 37.2912282677701, longitude: -121.88630908655603)
+        CLLocationCoordinate2D(latitude: 37.2912282677701, longitude: -121.88630908655603),
+        
+        CLLocationCoordinate2D(latitude: 48.86474096651445, longitude: 2.341976168271458),
+        CLLocationCoordinate2D(latitude: 48.8513010249519, longitude: 2.3910713220800517),
+        CLLocationCoordinate2D(latitude: 48.88430722089567, longitude: 2.368240358945286),
+        CLLocationCoordinate2D(latitude: 48.851447954890155, longitude: 2.423171999570286),
+        CLLocationCoordinate2D(latitude: 48.82975579853948, longitude: 2.349185946103489),
+        CLLocationCoordinate2D(latitude: 48.84894114003227, longitude: 2.3028373743261454),
+        CLLocationCoordinate2D(latitude: 48.84046833542856, longitude: 2.2781181360448954),
+        CLLocationCoordinate2D(latitude: 48.85402413473328, longitude: 2.3320198084081767),
+        CLLocationCoordinate2D(latitude: 48.87604448224109, longitude: 2.421970369931614),
+        CLLocationCoordinate2D(latitude: 48.868253774651905, longitude: 2.364120485898411),
+        CLLocationCoordinate2D(latitude: 48.82781294511909, longitude: 2.376480105039036),
+        CLLocationCoordinate2D(latitude: 48.83854763376411, longitude: 2.4005126978124736),
+        CLLocationCoordinate2D(latitude: 48.83018607431655, longitude: 2.3495292688573954),
+        CLLocationCoordinate2D(latitude: 48.811650076775976, longitude: 2.3840332056249736)
     ]
     
     private var subscribed = false
@@ -221,7 +236,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return
         }
         locationUpdates.onNext(location.coordinate)
-        let viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 20000, 20000)
+        let viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 10000, 10000)
         mapView.setRegion(viewRegion, animated: false)
     }
     
