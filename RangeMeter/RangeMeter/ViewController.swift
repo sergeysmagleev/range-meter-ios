@@ -107,7 +107,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             coordinates.forEach { (coordinate) in
                 path.addLine(to: CGPoint(x: coordinate.latitude, y: coordinate.longitude))
             }
-//            path.move(to: CGPoint(x: firstPoint.latitude, y: firstPoint.longitude))
             path.addLine(to: CGPoint(x: firstPoint.latitude, y: firstPoint.longitude))
             path.closeSubpath()
             return path
@@ -130,19 +129,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.mapView.removeAnnotations(self.currentPins)
                 self.currentPins = annotations
             }).disposed(by: disposeBag)
-        
-//        hardcodedPinLocations.map { coordinate -> MKPointAnnotation in
-//            let view = MKPointAnnotation()
-//            view.coordinate = coordinate
-//            return view
-//            }.forEach { (annotation) in
-//                mapView.addAnnotation(annotation)
-//        }
-        
-//            .map { coordinates -> [CLLocationCoordinate2D] in
-//            return hardcodedPinLocations.filter{
-//
-//            }
             
         response.map { coordinates -> MKPolygon in
             return MKPolygon(coordinates: coordinates, count: coordinates.count)

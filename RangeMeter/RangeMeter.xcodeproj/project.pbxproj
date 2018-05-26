@@ -23,6 +23,7 @@
 		C5F045F220B8700F00EFA281 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045F120B8700F00EFA281 /* Component.swift */; };
 		C5F045F420B8713200EFA281 /* CoordinateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045F320B8713200EFA281 /* CoordinateTransform.swift */; };
 		C5F045FA20B895BB00EFA281 /* BatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F045F920B895BB00EFA281 /* BatteryView.swift */; };
+		C5F0460220B96C8000EFA281 /* Paris_Notre_Dame.gpx in Resources */ = {isa = PBXBuildFile; fileRef = C5F0460120B96C8000EFA281 /* Paris_Notre_Dame.gpx */; };
 		FA7CD750A5EF1A5396E518AA /* Pods_RangeMeter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A6FE9FD243D44438B55877 /* Pods_RangeMeter.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		C5F045F120B8700F00EFA281 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		C5F045F320B8713200EFA281 /* CoordinateTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateTransform.swift; sourceTree = "<group>"; };
 		C5F045F920B895BB00EFA281 /* BatteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryView.swift; sourceTree = "<group>"; };
+		C5F0460120B96C8000EFA281 /* Paris_Notre_Dame.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Paris_Notre_Dame.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 		C5F045B820B8522600EFA281 /* RangeMeter */ = {
 			isa = PBXGroup;
 			children = (
+				C5F0460120B96C8000EFA281 /* Paris_Notre_Dame.gpx */,
 				C5F045D920B8551600EFA281 /* Source */,
 				C5F045B920B8522600EFA281 /* AppDelegate.swift */,
 				C5F045BB20B8522600EFA281 /* ViewController.swift */,
@@ -284,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5F045C420B8522800EFA281 /* LaunchScreen.storyboard in Resources */,
+				C5F0460220B96C8000EFA281 /* Paris_Notre_Dame.gpx in Resources */,
 				C5F045C120B8522800EFA281 /* Assets.xcassets in Resources */,
 				C5F045BF20B8522600EFA281 /* Main.storyboard in Resources */,
 			);
