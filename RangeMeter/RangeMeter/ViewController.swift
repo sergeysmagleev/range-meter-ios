@@ -14,6 +14,9 @@ import MapKit
 import CoreLocation
 import CoreGraphics
 
+let hereAPIAppId = ""
+let hereAPIAppCode = ""
+
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
@@ -99,7 +102,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             })
             .flatMap { (arg) -> Observable<(HTTPURLResponse, Any)> in
                 let (locationString, batteryLife) = arg
-                return RxAlamofire.requestJSON(.get, "https://isoline.route.cit.api.here.com/routing/7.2/calculateisoline.json?app_id=7IQiOdNho9z1vWo9aECh&app_code=oQDeGdXmm4oQAwqlwnCouQ&mode=fastest;car&rangetype=time&start=geo!\(locationString)&range=\(self.timeInSeconds(batteryLife: batteryLife))&singlecomponent=true")
+                return RxAlamofire.requestJSON(.get, "https://isoline.route.cit.api.here.com/routing/7.2/calculateisoline.json?app_id=\(hereAPIAppId)&app_code=\(hereAPIAppCode)&mode=fastest;car&rangetype=time&start=geo!\(locationString)&range=\(self.timeInSeconds(batteryLife: batteryLife))&singlecomponent=true")
             }.map { (arg) -> Response? in
                 let (_, json) = arg
                 let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
